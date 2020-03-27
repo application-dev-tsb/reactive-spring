@@ -17,6 +17,8 @@ repositories {
 }
 
 dependencies {
+	//TODO: wait till spring implements this for reactive
+	//implementation("org.flywaydb:flyway-core")
 	implementation("org.springframework.boot:spring-boot-starter-data-r2dbc")
 	implementation("org.springframework.boot:spring-boot-starter-security")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")

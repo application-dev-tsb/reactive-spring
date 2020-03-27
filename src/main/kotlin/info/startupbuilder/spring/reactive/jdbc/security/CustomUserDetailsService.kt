@@ -1,6 +1,7 @@
 package info.startupbuilder.spring.reactive.jdbc.security
 
 import info.startupbuilder.spring.reactive.jdbc.repository.AccountRepository
+import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails
@@ -14,7 +15,7 @@ class CustomUserDetailsService(private val accountRepository: AccountRepository)
         return username?.let { accountRepository.findByUsername(it)
                 .map { account -> User.withUsername(account.username)
                         .password(account.password)
-                        .authorities("ADMIN", "USER")
+                        .authorities(account.accountAuthority.map { auth -> GrantedAuthority { auth.role } })
                         .build()
                 }
         }

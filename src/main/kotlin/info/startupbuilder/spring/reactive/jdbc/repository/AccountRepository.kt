@@ -7,6 +7,6 @@ import reactor.core.publisher.Mono
 
 interface AccountRepository : ReactiveCrudRepository<Account, Long> {
 
-    @Query("SELECT a.id, a.username, a.password FROM Account a WHERE username = :username")
+    @Query("SELECT a FROM Account a WHERE username = :username")
     fun findByUsername(username: String): Mono<Account>
 }
